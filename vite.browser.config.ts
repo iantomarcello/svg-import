@@ -5,12 +5,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/svg-import.ts',
-      formats: ['es', 'umd'],
+      formats: ['iife'],
       name: "SVGImport",
-      fileName: (format) => `svg-import.${format}.js`
     },
-    rollupOptions: {
-      external: /^lit/,
-    }
+    outDir: 'dist/browser',
   }
 })

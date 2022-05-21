@@ -3,9 +3,13 @@
   "description": "Imports an SVG and embed as HTML",
   "private": true,
   "version": "0.0.0",
-  "main": "dist/svg-import.es.js",
+  "main": "dist/svg-import.umd.js",
+  "module": "dist/svg-import.es.js",
   "exports": {
-    ".": "./dist/svg-import.es.js"
+    ".": {
+      "import": "./dist/svg-import.es.js",
+      "require": "./dist/svg-import.umd.js"
+    }
   },
   "types": "types/svg-import.d.ts",
   "files": [
@@ -14,7 +18,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build"
+    "build": "npm run build:default && npm run build:browser",
+    "build:default": "tsc && vite build",
+    "build:browser": "tsc && vite build -c vite.browser.config.ts"
   },
   "dependencies": {
     "lit": "^2.0.2"
