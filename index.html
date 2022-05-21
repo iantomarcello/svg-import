@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG Import</title>
+    <script type="module" src="/src/svg-import.ts"></script>
+    <style>
+      svg-import {
+        display: inline-block;
+      }
+
+      @keyframes rainbowize {
+        0% { fill: red; }
+        15% { fill: orange; }
+        30% { fill: yellow; }
+        45% { fill: green; }
+        60% { fill: blue; }
+        75% { fill: indigo; }
+        90% { fill: purple; }
+      }
+
+      svg-import path:first-child {
+        animation: rainbowize 10s infinite linear;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex;">
+      <svg-import id="importer" src="./src/favicon.svg" title="vite logo"></svg-import>
+      <img id="img" src="./src/favicon.svg" alt="vite logo">
+    </div>
+    <button id="switcher">Switch logo</button>
+    <script>
+      importer.addEventListener('loading', console.log);
+      importer.addEventListener('loaded', console.log);
+
+      let isViteLogo = true;
+
+      switcher.addEventListener('click', () => {
+        isViteLogo = !isViteLogo;
+        importer.src = isViteLogo ? './src/favicon.svg' : './src/logo-wc.svg';
+        img.src = isViteLogo ? './src/favicon.svg' : './src/logo-wc.svg';
+      });
+    </script>
+  </body>
+</html>
